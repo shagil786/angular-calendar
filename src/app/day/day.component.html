@@ -1,0 +1,59 @@
+<button
+  *appGlobalToolbarWidget
+  mat-icon-button
+  matTooltip="Add appointment"
+  (click)="addAppointment()"
+>
+  <mat-icon>add</mat-icon>
+</button>
+
+<button
+  *appGlobalToolbarWidget
+  mat-icon-button
+  matTooltip="Next day"
+  (click)="nextDay()"
+>
+  <mat-icon>chevron_right</mat-icon>
+</button>
+
+<button
+  *appGlobalToolbarWidget
+  mat-icon-button
+  matTooltip="Previous day"
+  (click)="previousDay()"
+>
+  <mat-icon>chevron_left</mat-icon>
+</button>
+
+<div class="hours">
+  <app-hour
+    *ngFor="let hour of hours; trackBy: trackByValue"
+    [hour]="hour"
+    [style.top.px]="hour * 60 * pixelsPerMinute"
+    [style.height.px]="60 * pixelsPerMinute"
+  ></app-hour>
+</div>
+
+<app-current-time-indicator [pixelsPerMinute]="pixelsPerMinute"></app-current-time-indicator>
+
+<div
+  class="appointments"
+  #appointments
+  (dblclick)="addAppointment(($event.clientY - appointments.getBoundingClientRect().top) / pixelsPerMinute)"
+>
+  <app-appointment
+    *ngFor="let appointment of appointments$ | async; trackBy: trackById"
+    #cdkDrag="cdkDrag"
+    [data]="appointment"
+    [style.transform]="'translate3d(0, ' + (appointment.start.getHours() * 60 + appointment.start.getMinutes()) * pixelsPerMinute + 'px, 0)'"
+    [style.height.px]="appointment.length * pixelsPerMinute"
+    [style.left]="offsets()?.get(appointment)?.left ?? null"
+    [style.width]="offsets()?.get(appointment)?.width ?? null"
+    cdkDrag
+    [cdkDragBoundary]="appointments"
+    (cdkDragEnded)="setAppointmentStart(appointment, (cdkDrag.element.nativeElement.getBoundingClientRect().top -
+    appointments.getBoundingClientRect().top) / pixelsPerMinute);"
+    (dblclick)="editAppointment(appointment); $event.stopPropagation();"
+    (delete)="deleteAppointment(appointment)"
+  ></app-appointment>
+</div>

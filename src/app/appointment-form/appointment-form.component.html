@@ -1,0 +1,73 @@
+<mat-dialog-content [formGroup]="form">
+
+  <div style="display: flex; justify-content: space-between;">
+    <mat-form-field style="flex: 3;">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field style="flex: 1;">
+      <mat-label>Color</mat-label>
+      <mat-select formControlName="color" #colorSelect>
+        <mat-select-trigger>
+          <ng-container *ngIf="colorSelect.value">
+            <span class="color-box" [style.background-color]="$any(appointmentColors)[colorSelect.value]"></span>&nbsp;{{ $any(appointmentColors)[colorSelect.value] }}
+          </ng-container>
+        </mat-select-trigger>
+        @for (color of colors; track color.key) {
+          <mat-option [value]="color.key">
+            <span class="color-box" [style.background-color]="color.value"></span>&nbsp;{{ color.value }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div style="display: flex; justify-content: space-between;">
+    <mat-form-field>
+      <mat-label>Start Date</mat-label>
+      <input matInput formControlName="startDate" [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Start Time</mat-label>
+      <mat-select formControlName="startTime">
+        @for (time of startTimes; track time) {
+          <mat-option [value]="time">{{ time | formatTime }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Duration</mat-label>
+      <mat-select formControlName="length">
+        @for (time of lengths; track time) {
+          <mat-option [value]="time">{{ time | formatTime }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions style="display: flex; justify-content: end;">
+
+  <button mat-raised-button mat-dialog-close>
+    Cancel
+  </button>
+
+  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">
+    OK
+  </button>
+
+</mat-dialog-actions>

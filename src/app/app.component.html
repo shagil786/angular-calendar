@@ -1,0 +1,32 @@
+<app-current-time *appGlobalToolbarWidget />
+
+<mat-toolbar class="example-header">
+  <div class="flex: auto">
+    <span>Angular Calendar</span>
+  </div>
+
+  <div style="flex: auto"></div>
+
+  <app-global-toolbar-widgets />
+</mat-toolbar>
+
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" opened class="example-sidenav">
+    <mat-calendar
+      [startAt]="date$ | async"
+      (selectedChange)="redirect($event)"
+    />
+
+    <div style="flex: auto"></div>
+
+    <app-next-appointment />
+
+    <app-totals />
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<mat-toolbar class="example-footer">&copy; Md Shagil Nizami 2024</mat-toolbar>

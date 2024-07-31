@@ -1,0 +1,33 @@
+:host {
+  display: block;
+  position: relative;
+  margin: 10px;
+  background-color: #fff; /* Changed background color to white */
+  border-radius: 8px; /* Added border radius for rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+}
+
+.hours,
+.appointments {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.hours {
+  border-bottom: 1px dotted #ccc; /* Changed border color to a lighter shade of gray */
+}
+
+app-appointment {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 5px; /* Added margin for spacing between appointments */
+  background-color: #f0f0f0; /* Added background color for appointments */
+  border: 1px solid #ccc; /* Added border for appointments */
+  border-radius: 5px; /* Added border radius for rounded corners */
+  padding: 10px; /* Added padding for content within appointments */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+}

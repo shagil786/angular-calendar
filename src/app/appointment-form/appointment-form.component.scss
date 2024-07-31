@@ -1,0 +1,29 @@
+/* Apply styles to the root element of the component */
+:host {
+  display: block;
+  position: relative;
+  box-sizing: border-box; /* Changed to border-box for consistent sizing */
+  margin: 10px;
+  background-color: #f0f0f0; /* Light gray background */
+  padding: 20px; /* Added padding for spacing */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+}
+
+/* Apply styles to Angular Material form fields */
+mat-form-field {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px; /* Added margin bottom for vertical spacing */
+}
+
+/* Style for the color box */
+.color-box {
+  display: inline-block;
+  width: 1.5em; /* Increased width for better visibility */
+  height: 1.5em; /* Increased height for better visibility */
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  vertical-align: middle; /* Align vertically with text */
+  border-radius: 50%; /* Rounded shape */
+  margin-right: 10px; /* Added margin right for spacing */
+}
